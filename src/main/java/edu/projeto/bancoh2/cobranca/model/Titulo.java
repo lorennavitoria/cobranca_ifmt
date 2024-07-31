@@ -34,6 +34,9 @@ public class Titulo {
 	private BigDecimal valor;
 	@Enumerated(EnumType.STRING)
 	private StatusTitulo status;
+	
+	
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -64,6 +67,8 @@ public class Titulo {
 	public void setStatus(StatusTitulo status) {
 		this.status = status;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(codigo);
