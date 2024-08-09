@@ -27,7 +27,7 @@ public class Titulo {
 	private Long codigo;
 	private String descricao;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	 @DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date dataVencimento;
 	@NumberFormat(pattern="#,##.00")
