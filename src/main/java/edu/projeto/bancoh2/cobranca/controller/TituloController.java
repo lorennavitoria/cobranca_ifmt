@@ -21,6 +21,8 @@ public class TituloController {
 	@Autowired
 	private TitulosRepository titulosRepository;
 	
+	
+	
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView("CadastroTitulo");
@@ -40,6 +42,15 @@ public class TituloController {
 	@ModelAttribute("todosStatusTitulo")
 	public List<StatusTitulo> todosStatusTitulo(){
 		return Arrays.asList(StatusTitulo.values());
+	}
+	
+	@RequestMapping
+	public ModelAndView pesquisar() {
+		List<Titulo> todosTitulos = titulosRepository.findAll();
+		ModelAndView mv = new ModelAndView("PesquisaTitulos");
+		mv.addObject("titulos", todosTitulos);
+		return mv;
+
 	}
 
 }
