@@ -29,6 +29,11 @@
 				<span class="tux-titulo-panel">Pesquisa</span>
 		   </div>
 		   
+		   <div class="search-btn">
+			</br>
+		   		<a href="/titulos/novo" class="btn btn-primary">Cadastrar +</a>
+				</br>
+		   </div>
 		   
 		   
 		   <div class="card-body">
@@ -49,7 +54,10 @@
 						<td th:text="${titulo.descricao}"></td>		
 						<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>	
 						<td class="text-right" th:text="|R$ ${{titulo.valor}}|"></td>	
-						<td class="text-center" th:text="${titulo.status.descricao}"></td>				
+						<td class="text-center">
+							<span class="badge" th:text="${titulo.status.descricao}" 
+						    th:classappend="${titulo.status.name() == 'PENDENTE' ? 'badge-danger' : 'badge-success'}"></span>
+						</td>				
 					</tr>
 					<tr>
 						<td colspan="6" th:if="${#lists.isEmpty(titulos)}">Nenhum registro encontrado.</td>

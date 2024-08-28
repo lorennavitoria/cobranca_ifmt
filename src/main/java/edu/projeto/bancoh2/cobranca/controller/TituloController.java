@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,6 +53,7 @@ public class TituloController {
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView("CadastroTitulo");
 		mv.addObject("todosStatusTitulo", StatusTitulo.values());
+		mv.addObject(new Titulo());
 		return mv;
 	}
 
@@ -66,9 +69,13 @@ public class TituloController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView salvar(Titulo titulo) {
-		tituloRepository.save(titulo);
+	public ModelAndView salvar(@Validated Titulo titulo, Errors errors) {
+		
 		ModelAndView mv = new ModelAndView("CadastroTitulo");
+		if(errors.hasErrors()) {
+			return mv;
+		}
+		tituloRepository.save(titulo);
 		mv.addObject("mensagem", "Foi salvo com sucesso");
 
 		return mv;
@@ -79,7 +86,7 @@ public class TituloController {
 		return Arrays.asList(StatusTitulo.values());
 	}
 
-	@RequestMapping
+	@RequestMapping("/pesquisa")
 	public ModelAndView pesquisar() {
 		List<Titulo> todosTitulos = tituloRepository.findAll();
 		ModelAndView mv = new ModelAndView("PesquisaTitulos");
